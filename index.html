@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="style.css">
+    <!-- <link rel="stylesheet" href="scripts.js"> -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PixelArt</title>
+</head>
+
+<body>
+    <div class="button-container1">
+        <table>
+            <tr>
+                <td>
+                    <button class="buttons" id="genColor"><h3>Random Color</h2></button>
+                    <div class="shadow2"></div>
+                </td>
+                <td>
+                    <button class="buttons" id="clear"><h1>clear</h2></button>
+                    <div class="shadow2"></div>
+                </td>
+                <td>
+                    <button class="buttons" id="fill"><h1>fill</h2></button>
+                    <div class="shadow2"></div>
+                </td>
+                <td>
+                    <div class="shadow3"></div>
+                    <div class="button-container2">
+                        <br>
+                        <div class="button-container-background">
+                            <p>Custom Color</p>
+                            <input value="hex code" id="customColor" type="text" maxlength="7">
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="palette"> </div>
+    <div class="grid-container">
+        <div class="shadow1"></div>
+        <div class="size">
+            <p>Size</p>
+            <input value="20" type="number" id="size" name="size" required min-length="1" maxlength="3" size="1">
+
+        </div>
+        <div class="grid"></div>
+    </div>
+
+    <script src="scripts.js"></script>
+</body>
+
+</html>
