@@ -8,9 +8,12 @@ const customColorBackground = document.querySelector('.button-container-backgrou
 const fill = document.getElementById('fill')
 const clear = document.getElementById('clear')
 const size = document.querySelector('.size');
+const err = document.getElementById('err')
+const prev = document.getElementById('prevColor')
 
+let prevColor
 let fillColor
-let currentColor = 'red'
+let currentColor = ['red', 'blue']
 let paintColors = ['#0000F6', '#6E6ED8', '#51519C', '#3F3F5E', '#101046', '#4444E8', '#2B2BA8', '#3A3AC8', '#833CC9', '#7622E1', '#4C11CB', '#7545FF', '#AE9DDE', '#4614B1', '#6836D2', '#A870DF', '#FF00D6', '#B70E9C', '#620052', '#B143A0', '#FF7EEA', '#FF4EE3', '#FFC0F5', '#67375F', '#D20000', '#9B0000', '#B63A3A', '#DE4040', '#FF0000', '#591515', '#FF5B5B', '#FF8E8E', '#FF5C00', '#FE813A', '#E79C71', '#7E370F', '#FFAC7D', '#B03F00', '#B65A26', '#7B492C', '#FAFF00', '#FCFF7B', '#898C00', '#5E6000', '#B4B66F', '#BBBE34', '#B7E72F', '#D3C224', '#33FF00', '#49853A', '#318D1A', '#104303', '#83FF64', '#25B900', '#0B3700', '#B9FFA8', '#00F0FF', '#1BA0B2', '#09768D', '#4796A8', '#004751', '#007A82', '#BDFBFF', '#000000'];
 let value1Box = document.getElementById("size");
 let value1 = value1Box.value;
@@ -26,8 +29,8 @@ function palette1() {
         shadow.appendChild(color);
 
         color.addEventListener('click', () => {
+            prevColor = currentColor;
             currentColor = color.style.backgroundColor;
-            console.log(currentColor);
         });
 
         color.style.backgroundColor = paintColors[i];
@@ -37,15 +40,34 @@ function palette1() {
     }
 }
 
+function colorPrev() {
+    document.body.addEventListener('click', () => {
+        if (prev.style.backgroundColor.value !== currentColor)
+            prev.style.backgroundColor = prevColor;
+    }
+    )
+    prev.addEventListener('click', () => {
+        currentColor = prevColor;
+    }
+    )
+}
 
 function colorDisplay() {
     document.body.addEventListener('click', () => {
         if (size.style.backgroundColor.value !== currentColor)
-    size.style.backgroundColor = currentColor;
-}
-    )};
-    
+            size.style.backgroundColor = currentColor;
+    }
+    )
+};
 
+
+
+function Erase() {
+    err.addEventListener('click', () => {
+        currentColor = '';
+    }
+    )
+}
 
 function fillGrid() {
     fill.addEventListener('click', () => {
@@ -55,6 +77,7 @@ function fillGrid() {
 
 let customColorButton = () => {
     customColorBackground.style.backgroundColor = customColor.value;
+    prevColor = currentColor;
     currentColor = customColor.value;
 }
 
@@ -62,6 +85,7 @@ const generateColor = () => {
     const randomColor = Math.floor(Math.random() * 16777215).toString(16);
     genColor.style.backgroundColor = "#" + randomColor;
     genColor.addEventListener("click", () => {
+        prevColor = currentColor;
         currentColor = "#" + randomColor;
     })
 
@@ -169,13 +193,13 @@ function fillGrid() {
 }
 
 const dragAndDraw = () => {
-        grid.addEventListener('mousedown', (e) => {
+    grid.addEventListener('mousedown', (e) => {
         e.preventDefault();
         down = true;
         grid.addEventListener('mouseup', (e) => {
             e.preventDefault();
             down = false;
-            
+
         });
         grid.addEventListener('mouseleave', () => {
             down = false;
@@ -189,28 +213,10 @@ const dragAndDraw = () => {
 }
 
 
-const dragAndErr = () => {
-    grid.addEventListener('mousedown', (e) => {
-        e.preventDefault();
-        down = true;
-        grid.addEventListener('mouseup', (e) => {
-            down = false;
-            e.preventDefault();
-        });
-        grid.addEventListener('mouseleave', () => {
-            down = false;
-        });
-        grid.addEventListener('mouseover', (e) => {
-            if (e.target.className === "square" && down) {
-                e.target.style.backgroundColor = '';
-            }
-        });
-    });
-}
+
 
 
 grid.addEventListener('click', dragAndDraw);
-grid.addEventListener('contextmenu', dragAndErr);
 genColor.addEventListener("contextmenu", generateColor);
 genColor.addEventListener("contextmenu", (e) => {
     e.preventDefault();
@@ -218,6 +224,8 @@ genColor.addEventListener("contextmenu", (e) => {
 customColor.addEventListener("change", customColorButton);
 
 function init() {
+    colorPrev()
+    Erase()
     colorDisplay()
     makeGrid()
     sizeChange()

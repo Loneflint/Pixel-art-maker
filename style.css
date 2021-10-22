@@ -52,6 +52,7 @@ body {
     padding-bottom: 60px;
 }
 .size {
+    margin-top: -89px;
     margin-bottom: -15px;
     margin-left: 220px;
     background-color: white;
@@ -70,11 +71,20 @@ body {
     text-align: center;
     
 }
+.prev {
+    border-radius: 10px;
+    border: 15px solid #47B2C2;
+    z-index: -1;
+    margin-left: 170px;
+    margin-top: 5px;
+    width: 80px;
+    height: 89px;
+}
 .button-container1 {
-    margin-left: 100px;
+    margin-left: 30px;
     margin-top: 50px;
     border-radius: 10px;
-    width: 410px;
+    width: 540px;
     height: 100px;
     background-color: #101D42;
 }
